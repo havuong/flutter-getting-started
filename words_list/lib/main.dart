@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 final wordPair = new WordPair.random();
 
@@ -20,21 +23,47 @@ class RandomEnglishWordsState extends State<RandomEnglishWords> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('List of English words'),
-        actions: <Widget>[
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
-        ],
-      ),
-      body: Center(
-        child: ListView.builder(itemBuilder: (context, index) {
-          if (index >= _words.length) {
-            _words.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_words[index], index);
-        }),
-      ),
-    );
+        appBar: new AppBar(
+          title: new Text('List of English words'),
+          actions: <Widget>[
+            new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
+          ],
+        ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              expandedHeight: 150.0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.network(
+                  'https://image.freepik.com/free-vector/english-word-education-banner_66675-157.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SliverFixedExtentList(
+                delegate: SliverChildListDelegate([
+                  Text('1'),
+                  Text('1'),
+                  Text('1'),
+                  Text('1'),
+                ]),
+                itemExtent: 50.0)
+          ],
+        )
+        // new Column(children: <Widget>[
+        // new Image.asset(
+        //   'images/english-bar.jpg',
+        //   fit: BoxFit.cover,
+        // ),
+        // ListView.builder(itemBuilder: (context, index) {
+        //   if (index >= _words.length) {
+        //     _words.addAll(generateWordPairs().take(10));
+        //   }
+        //   return _buildRow(_words[index], index);
+        // }),
+        );
   }
 
   Widget _buildRow(WordPair wordPair, int index) {
