@@ -23,48 +23,41 @@ class RandomEnglishWordsState extends State<RandomEnglishWords> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('List of English words'),
-          actions: <Widget>[
-            new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
-          ],
-        ),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              floating: true,
-              pinned: true,
-              expandedHeight: 150.0,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  'https://image.freepik.com/free-vector/english-word-education-banner_66675-157.jpg',
-                  fit: BoxFit.cover,
-                ),
+      appBar: new AppBar(
+        title: new Text('List of English words'),
+        actions: <Widget>[
+          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
+        ],
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            expandedHeight: 150.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                'https://franchiseindia.s3.ap-south-1.amazonaws.com/uploads/content/edu/art/english1-083866aacd.png',
+                fit: BoxFit.cover,
               ),
             ),
-            SliverFixedExtentList(
-                delegate: SliverChildListDelegate([
-                  Text('1'),
-                  Text('1'),
-                  Text('1'),
-                  Text('1'),
-                ]),
-                itemExtent: 50.0)
-          ],
-        )
-        // new Column(children: <Widget>[
-        // new Image.asset(
-        //   'images/english-bar.jpg',
-        //   fit: BoxFit.cover,
-        // ),
-        // ListView.builder(itemBuilder: (context, index) {
-        //   if (index >= _words.length) {
-        //     _words.addAll(generateWordPairs().take(10));
-        //   }
-        //   return _buildRow(_words[index], index);
-        // }),
-        );
+          ),
+          SliverFixedExtentList(
+              delegate: SliverChildListDelegate([
+                ListView.builder(itemBuilder: (context, index) {
+                  if (index >= _words.length) {
+                    _words.addAll(generateWordPairs().take(10));
+                  }
+                  return _buildRow(_words[index], index);
+                }),
+              ]),
+              itemExtent: 500.0)
+        ],
+      ),
+    );
   }
+
+  Widget fourButtonSection = Container();
 
   Widget _buildRow(WordPair wordPair, int index) {
     final bool isSaved = _saved.contains(wordPair);
