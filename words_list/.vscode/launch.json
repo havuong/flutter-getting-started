@@ -4,9 +4,10 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         
         {
-            "program": "lib/TabbedAppBarDemo.dart",
+            "program": "lib/login_form.dart",
             "name": "Flutter",
             "request": "launch",
             "type": "dart"
