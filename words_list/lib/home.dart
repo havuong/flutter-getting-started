@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+// void main() {
+// WidgetsFlutterBinding.ensureInitialized();
+//   runApp(HomePage());
+// }
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Words List',
+      home: RandomEnglishWords(),
+    );
+  }
 }
 
-final wordPair = new WordPair.random();
-
 class RandomEnglishWords extends StatefulWidget {
+  final wordPair = new WordPair.random();
   @override
   State<StatefulWidget> createState() {
     return new RandomEnglishWordsState();
@@ -102,15 +111,5 @@ class RandomEnglishWordsState extends State<RandomEnglishWords> {
             children: divided,
           ));
     }));
-  }
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Words List',
-      home: RandomEnglishWords(),
-    );
   }
 }
