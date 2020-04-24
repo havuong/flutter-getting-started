@@ -11,6 +11,11 @@ class _MyAppState extends State<MyApp> {
   bool _showPass;
   TextEditingController _passController;
   TextEditingController _usernameController;
+  var _userNameErr = 'Username is invalid';
+  var _passErr = 'Password is invalid';
+  var _userInvalid = false;
+  var _passInvalid = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     decoration: InputDecoration(
                       labelText: 'USERNAME',
-                      errorText: 'Username không hợp lệ',
+                      errorText: _userInvalid ? _userNameErr : null,
                       labelStyle: TextStyle(
                         color: Colors.grey,
                         fontSize: 15,
@@ -81,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                         ),
                         decoration: InputDecoration(
                           labelText: 'PASSWORD',
-                          errorText: 'Password không hợp lệ',
+                          errorText: _passInvalid ? _passErr : null,
                           labelStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 15,
@@ -90,8 +95,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     GestureDetector(
-                      onTapDown: _onToggleShowPass,
-                      onTapUp: _onToggleShowPassAAA,
+                      onTapDown: _onTapDownShowPass,
+                      onTapUp: _onTapUpShowPass,
                       child: Text(
                         _showPass ? 'HIDE' : 'SHOW',
                         style: TextStyle(
@@ -137,15 +142,30 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _onSignInClicked() {}
+  void _onSignInClicked() {
+    setState(() {
+      if (_usernameController.text.length < 8 ||
+          !_usernameController.text.contains('@')) {
+        _userInvalid = true;
+      } else {
+        _userInvalid = false;
+      }
 
-  void _onToggleShowPass(TapDownDetails details) {
+      if (_passController.text.length < 6) {
+        _passInvalid = true;
+      } else {
+        _passInvalid = false;
+      }
+    });
+  }
+
+  void _onTapDownShowPass(TapDownDetails details) {
     setState(() {
       _showPass = true;
     });
   }
 
-  void _onToggleShowPassAAA(TapUpDetails details) {
+  void _onTapUpShowPass(TapUpDetails details) {
     setState(() {
       _showPass = false;
     });
