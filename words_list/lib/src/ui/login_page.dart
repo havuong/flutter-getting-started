@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:words_list/home.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-    );
-  }
-}
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -166,14 +156,15 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       if (!_userInvalid && !_passInvalid) {
-        Navigator.push(context, MaterialPageRoute(builder: (goToHome)));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     });
   }
 
-  Widget goToHome(BuildContext context) {
-    return HomePage();
-  }
+  // Widget goToHome(BuildContext context) {
+  //   return HomePage();
+  // }
 
   void _onTapDownShowPass(TapDownDetails details) {
     setState(() {
