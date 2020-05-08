@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import 'login_page.dart';
+import 'package:taxi_app/src/blocs/auth_bloc.dart';
+import 'package:taxi_app/src/ui/dialog/loading_dialog.dart';
+import 'package:taxi_app/src/ui/dialog/msg_dilog.dart';
+import 'package:taxi_app/src/ui/home_page.dart';
+import 'package:taxi_app/src/ui/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -9,6 +12,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  AuthBloc authBloc = new AuthBloc();
+
+  TextEditingController _nameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passController = new TextEditingController();
+  TextEditingController _phoneController = new TextEditingController();
+
+  @override
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,5 +162,22 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _onSignUpClicked() {}
+  void _onSignUpClicked() {
+    print("hello world");
+    var isValid = authBloc.isValid(_nameController.text, _emailController.text,
+        _passController.text, _phoneController.text);
+    if (isValid) {
+      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      authBloc.signUp(_emailController.text, _passController.text,
+          _phoneController.text, _nameController.text, () {
+        LoadingDialog.hideLoadingDialog(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }, (msg) {
+        LoadingDialog.hideLoadingDialog(context);
+        MsgDialog.showMsgDialog(context, "Sign-In", msg);
+      });
+    }
+    print("hello world - end");
+  }
 }

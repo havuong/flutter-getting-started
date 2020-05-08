@@ -1,38 +1,38 @@
 {
   "project_info": {
-    "project_number": "474795866774",
-    "firebase_url": "https://flutter-taxiapp-24747.firebaseio.com",
-    "project_id": "flutter-taxiapp-24747",
-    "storage_bucket": "flutter-taxiapp-24747.appspot.com"
+    "project_number": "334885474300",
+    "firebase_url": "https://flutter-taxi-demo.firebaseio.com",
+    "project_id": "flutter-taxi-demo",
+    "storage_bucket": "flutter-taxi-demo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:474795866774:android:b2675090b012578510a0b7",
+        "mobilesdk_app_id": "1:334885474300:android:602cb387581d0a8114ac79",
         "android_client_info": {
           "package_name": "com.example.taxi_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "474795866774-r9ofpnuhtjog24vfrfjhk59du3vufaas.apps.googleusercontent.com",
+          "client_id": "334885474300-q25ovtkna9u4ao7et85diole16m7t6ub.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBb-QvnrzxQNTfkDkTNqzd4aI0eqm2bys"
+          "current_key": "AIzaSyA5YHwGPl_Kg2QetGkYr7PKtSfNapYp5Bg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "474795866774-r9ofpnuhtjog24vfrfjhk59du3vufaas.apps.googleusercontent.com",
+              "client_id": "334885474300-q25ovtkna9u4ao7et85diole16m7t6ub.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "474795866774-1jra9hsurosmsr2iivfh7rrsbbqmetuf.apps.googleusercontent.com",
+              "client_id": "334885474300-po2tooh3ae7mbi7uie14e3k4l1t8jheo.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.taxiApp"

@@ -1,5 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:taxi_app/src/app.dart';
+import 'package:taxi_app/src/ui/dialog/loading_dialog.dart';
+import 'package:taxi_app/src/ui/dialog/msg_dilog.dart';
+import 'package:taxi_app/src/ui/home_page.dart';
 
 import 'register_page.dart';
 
@@ -9,6 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 70, 0, 20),
                 child: TextField(
+                  keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                   decoration: InputDecoration(
                       labelText: "Email",
@@ -49,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextField(
+                keyboardType: TextInputType.text,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 obscureText: true,
                 decoration: InputDecoration(
@@ -116,5 +124,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onLoginClick() {}
+  void _onLoginClick() {
+    String email = _emailController.text;
+    String pass = _passController.text;
+    var authBloc = TaxiCar.of(context).autoBloc;
+    LoadingDialog.showLoadingDialog(context, "Loading...");
+    authBloc.signIn(email, pass, () {
+      LoadingDialog.hideLoadingDialog(context);
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    }, (msg) {
+      LoadingDialog.hideLoadingDialog(context);
+      MsgDialog.showMsgDialog(context, "Sign-In", msg);
+    });
+  }
 }
