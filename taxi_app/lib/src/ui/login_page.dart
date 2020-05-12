@@ -43,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 70, 0, 20),
                 child: TextField(
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                   decoration: InputDecoration(
@@ -56,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextField(
+                controller: _passController,
                 keyboardType: TextInputType.text,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 obscureText: true,

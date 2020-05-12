@@ -53,7 +53,9 @@ class _RegisterPageState extends State<RegisterPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
                 child: StreamBuilder(
+                    stream: authBloc.nameStream,
                     builder: (context, snapshot) => TextField(
+                          controller: _nameController,
                           style: TextStyle(fontSize: 18, color: Colors.black),
                           decoration: InputDecoration(
                               errorText:
@@ -69,7 +71,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         )),
               ),
               StreamBuilder(
+                  stream: authBloc.phoneStream,
                   builder: (context, snapshot) => TextField(
+                        controller: _phoneController,
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(
                             labelText: "Phone Number",
@@ -86,7 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                 child: StreamBuilder(
+                    stream: authBloc.emailStream,
                     builder: (context, snapshot) => TextField(
+                          controller: _emailController,
                           style: TextStyle(fontSize: 18, color: Colors.black),
                           decoration: InputDecoration(
                               labelText: "Email",
@@ -102,7 +108,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         )),
               ),
               StreamBuilder(
+                  stream: authBloc.passStream,
                   builder: (context, snapshot) => TextField(
+                        controller: _passController,
                         obscureText: true,
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(
@@ -163,9 +171,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onSignUpClicked() {
-    print("hello world");
-    var isValid = authBloc.isValid(_nameController.text, _emailController.text,
-        _passController.text, _phoneController.text);
+    var isValid = authBloc.isValid(
+        _nameController.text.trim(),
+        _emailController.text.trim(),
+        _passController.text.trim(),
+        _phoneController.text.trim());
     if (isValid) {
       LoadingDialog.showLoadingDialog(context, 'Loading...');
       authBloc.signUp(_emailController.text, _passController.text,
@@ -178,6 +188,5 @@ class _RegisterPageState extends State<RegisterPage> {
         MsgDialog.showMsgDialog(context, "Sign-In", msg);
       });
     }
-    print("hello world - end");
   }
 }

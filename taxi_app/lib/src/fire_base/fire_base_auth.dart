@@ -38,16 +38,13 @@ class FirAuth {
 
     var ref = FirebaseDatabase.instance.reference().child("users");
     ref.child(userId).set(user).then((user) {
-      // print("on value: SUCCESSED");
       onSuccess();
     }).catchError((err) {
       print("err: " + err.toString());
       onRegisterError("SignUp fail, please try again");
-    })
-        // .whenComplete(() {
-        // print("completed");
-        // })
-        ;
+    }).whenComplete(() {
+      print("completed");
+    });
   }
 
   void _onSignUpErr(String code, Function(String) onRegisterError) {

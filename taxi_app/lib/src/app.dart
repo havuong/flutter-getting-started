@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_app/src/blocs/auth_bloc.dart';
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: LoginPage(),
-//     );
-//   }
-// }
-
 class TaxiCar extends InheritedWidget {
   final AuthBloc autoBloc;
   final Widget child;
